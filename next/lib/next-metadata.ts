@@ -1,7 +1,9 @@
 const seoData = {
   title:
-    "LaunchPad - Your content delivery partner for large scale applications",
-  description: `A platform integrating Aceternity with Strapi for seamless content management.`,
+    "BITCOIN INITIATIVE",
+  description: `EIDGENÖSSISCHE VOLKSINITIATIVE «FÜR EINE FINANZIELL
+STARKE, SOUVERÄNE UND VERANTWORTUNGSVOLLE SCHWEIZ
+(BITCOIN-INITIATIVE)»`,
   image: "https://ui.aceternity.com/banner.png",
   openGraph: {
     type: "website",
@@ -17,11 +19,11 @@ const seoData = {
         url: `https://ui.aceternity.com/banner.png`, // TODO: Fix this
       },
     ],
-    site_name: "launchpad",
+    site_name: "Bitcoin Initiative",
   },
   twitter: {
-    handle: "@mannupaaji",
-    site: "ui.aceternity.com", // TODO: Fix this
+    handle: "@initiativeBTC",
+    site: "https://x.com/initiativebtc", // TODO: Fix this
     cardType: "summary_large_image",
   },
 };

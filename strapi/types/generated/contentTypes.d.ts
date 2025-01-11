@@ -698,6 +698,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'dynamic-zone.cta',
         'dynamic-zone.form-next-to-section',
         'dynamic-zone.faq',
+        'dynamic-zone.people-list',
       ]
     > &
       Schema.Attribute.SetPluginOptions<{
@@ -722,6 +723,79 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.DefaultTo<'slug'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPersonPerson extends Struct.CollectionTypeSchema {
+  collectionName: 'people';
+  info: {
+    description: '';
+    displayName: 'Person';
+    pluralName: 'people';
+    singularName: 'person';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    firstname: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    lastname: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::person.person'>;
+    Position: Schema.Attribute.Enumeration<
+      ['committee', 'extended-committee']
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    socialMedia: Schema.Attribute.Component<
+      'shared.social-media-icon-links',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1463,6 +1537,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::logo.logo': ApiLogoLogo;
       'api::page.page': ApiPagePage;
+      'api::person.person': ApiPersonPerson;
       'api::plan.plan': ApiPlanPlan;
       'api::product-page.product-page': ApiProductPageProductPage;
       'api::product.product': ApiProductProduct;

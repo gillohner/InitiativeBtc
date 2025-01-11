@@ -183,6 +183,20 @@ export interface DynamicZoneLaunches extends Struct.ComponentSchema {
   };
 }
 
+export interface DynamicZonePeopleList extends Struct.ComponentSchema {
+  collectionName: 'components_dynamic_zone_people_lists';
+  info: {
+    description: '';
+    displayName: 'People_List';
+    icon: 'emotionHappy';
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<['committee', 'extended-committee']>;
+    heading: Schema.Attribute.String;
+    sub_heading: Schema.Attribute.String;
+  };
+}
+
 export interface DynamicZonePricing extends Struct.ComponentSchema {
   collectionName: 'components_dynamic_zone_pricings';
   info: {
@@ -520,6 +534,7 @@ declare module '@strapi/strapi' {
       'dynamic-zone.hero': DynamicZoneHero;
       'dynamic-zone.how-it-works': DynamicZoneHowItWorks;
       'dynamic-zone.launches': DynamicZoneLaunches;
+      'dynamic-zone.people-list': DynamicZonePeopleList;
       'dynamic-zone.pricing': DynamicZonePricing;
       'dynamic-zone.related-articles': DynamicZoneRelatedArticles;
       'dynamic-zone.related-products': DynamicZoneRelatedProducts;

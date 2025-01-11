@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_dynamic_zone_people_lists",
+  "info": {
+    "displayName": "People_List",
+    "icon": "emotionHappy",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "sub_heading": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "committee",
+        "extended-committee"
+      ]
+    }
+  }
+}
