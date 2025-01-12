@@ -63,7 +63,7 @@ export const BlogPostRow = ({ article }: { article: Article }) => {
 
         <div className="flex gap-2 items-center my-4">
           <p className="text-neutral-300 text-sm  max-w-xl group-hover:text-white transition duration-200">
-            {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
+            {format(new Date(article.date ? article.date : article.publishedAt), "MMMM dd, yyyy")}
           </p>
           <div className="h-1 w-1 rounded-full bg-neutral-800"></div>
           <div className="flex gap-4 flex-wrap ">

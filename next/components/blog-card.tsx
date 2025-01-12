@@ -60,7 +60,7 @@ export const BlogCard = ({ article, locale }: { article: Article, locale: string
           {/* <p className="text-sm font-normal text-muted">{article.author}</p> */}
           <div className="h-1 w-1 bg-neutral-300 rounded-full"></div>
           <p className="text-neutral-300 text-sm  max-w-xl group-hover:text-white transition duration-200">
-            {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
+            {format(new Date(article.date ? article.date : article.publishedAt), "MMMM dd, yyyy")}
           </p>
         </div>
       </div>
@@ -119,7 +119,7 @@ export const BlogCardVertical = ({ article, locale }: { article: Article, locale
           <p className="text-sm font-normal text-muted">{article.author}</p> */}
           <div className="h-1 w-1 bg-neutral-300 rounded-full"></div>
           <p className="text-neutral-300 text-sm  max-w-xl group-hover:text-white transition duration-200">
-            {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
+            {format(new Date(article.date ? article.date : article.publishedAt), "MMMM dd, yyyy")}
           </p>
         </div>
       </div>

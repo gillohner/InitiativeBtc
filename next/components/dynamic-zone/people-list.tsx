@@ -1,9 +1,13 @@
+"use client"; // Ensure this component is treated as a client component
+
 import { Container } from "@/components/container";
 import { Heading } from "@/components/elements/heading";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import fetchContentType from "@/lib/strapi/fetchContentType";
-import Image from "next/image";
-import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer';
+import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import SocialMediaButtons from '../elements/socialMediaButtons';
+import { motion } from 'framer-motion';
+import "./people-list.css";
 
 interface PeopleListProps {
   heading: string;
@@ -30,12 +34,11 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
       style={imageUrl ? { backgroundImage: `url(${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '320px' } : {}}
     >
       {!imageUrl && (
-        <div className="flex-1" style={{height: "320px"}}></div>
+        <div className="flex-1" style={{ height: "320px" }}></div>
       )}
     </div>
   );
-  
-  
+
   return (
     <Container className="flex flex-col items-center justify-between">
       <div className="relative z-20 py-10 md:pt-40">
@@ -45,33 +48,39 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
         <p className="mt-2 text-neutral-400">{sub_heading}</p>
       </div>
       <BentoGrid>
-        {peopleData.map((person: any) => {
+        {peopleData.map((person) => {
           const firstname = person.firstname || "Unknown";
           const lastname = person.lastname || "Unknown";
           const description = <BlocksRenderer content={person.description} />;
-          const socialMedia = person.socialMedia || [];
           const image = person.image || [];
           const imageUrl = image[0]?.url ? "http://localhost:1337" + person?.image[0]?.url : "";
-          console.log(imageUrl);
-        
+          const socialMedia = person.socialMedia || [];
 
           return (
-            <BentoGridItem
-              key={person.id}
-              title={`${firstname} ${lastname}`}
-              description={
-                description
-              }
-              header={
-                <Skeleton imageUrl={imageUrl} />
-              }
+            <motion.div 
+              key={person.id} 
+              whileHover={{ scale: 1.05 }} // Scale up on hover
+              transition={{ type: "spring", stiffness: 300 }}
             >
-            </BentoGridItem>
+              <BentoGridItem
+                title={`${firstname} ${lastname}`}
+                description={
+                  <>
+                    <div className="text-container">
+                      {description}
+                    </div>
+                    <SocialMediaButtons socialMedia={socialMedia}/>
+                  </>
+                }
+                header={<Skeleton imageUrl={imageUrl} />}
+              >
+              </BentoGridItem>
+            </motion.div>
           );
         })}
       </BentoGrid>
     </Container>
-  );
+  );  
 };
 
 export default PeopleList;

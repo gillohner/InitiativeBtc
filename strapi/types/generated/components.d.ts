@@ -486,6 +486,18 @@ export interface SharedSocialMediaIconLinks extends Struct.ComponentSchema {
     icon: 'expand';
   };
   attributes: {
+    icon: Schema.Attribute.Enumeration<
+      [
+        'X',
+        'Instagram',
+        'Telegram',
+        'Linkedin',
+        'YouTube',
+        'Nostr',
+        'Facebook',
+        'Email',
+      ]
+    >;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     link: Schema.Attribute.Component<'shared.link', true>;
   };

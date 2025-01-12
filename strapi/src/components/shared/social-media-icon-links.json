@@ -22,6 +22,19 @@
       "type": "component",
       "repeatable": true,
       "component": "shared.link"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "X",
+        "Instagram",
+        "Telegram",
+        "Linkedin",
+        "YouTube",
+        "Nostr",
+        "Facebook",
+        "Email"
+      ]
     }
   }
 }

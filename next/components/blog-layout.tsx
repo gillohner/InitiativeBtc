@@ -80,7 +80,7 @@ export async function BlogLayout({
                 className="flex items-center text-base "
               >
                 <span className="text-muted text-sm">
-                  {format(new Date(article.publishedAt), "MMMM dd, yyyy")}
+                  {format(new Date(article.date ? article.date : article.publishedAt), "MMMM dd, yyyy")}
                 </span>
               </time>
             </div>
