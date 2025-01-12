@@ -778,7 +778,7 @@ export interface ApiPersonPerson extends Struct.CollectionTypeSchema {
       }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::person.person'>;
-    Position: Schema.Attribute.Enumeration<
+    position: Schema.Attribute.Enumeration<
       ['committee', 'extended-committee']
     > &
       Schema.Attribute.SetPluginOptions<{

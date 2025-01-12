@@ -14,7 +14,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
   // Fetch people data filtered by category
   const people = await fetchContentType(
     "people",
-    `filters[Position][$eq]=${category}&populate=socialMedia`,
+    `filters[position][$eq]=${category}`,
     false
   );
 
@@ -39,24 +39,27 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
             person.description && typeof person.description === "string"
               ? person.description
               : "No description available.";
-          const imageUrl = "/default-avatar.png"; // Replace with actual image logic if applicable
           const socialMedia = person.socialMedia || [];
+          const image = person.image || [];
+          const imageUrl = person?.image[0]?.url;
+          const imgUrl = imageUrl ? "http://localhost:1337" + imageUrl : 'https://example.com/example.jpeg';
+
+          console.log(socialMedia)
+          console.log(image)
 
           return (
             <BentoGridItem
               key={person.id}
               title={`${firstname} ${lastname}`}
               description={description}
-              header={
-                <Image
+            >
+              <Image
                   src={imageUrl}
                   alt={`${firstname} ${lastname}`}
-                  width={96}
-                  height={96}
+                  width={300}
+                  height={300}
                   className="rounded-full"
-                />
-              }
-            >
+              />
               <div className="flex space-x-2 mt-2">
                 {socialMedia.map((link: any, index: number) => (
                   <a

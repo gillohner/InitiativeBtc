@@ -42,18 +42,6 @@
       },
       "component": "shared.social-media-icon-links"
     },
-    "Position": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "enumeration",
-      "enum": [
-        "committee",
-        "extended-committee"
-      ]
-    },
     "image": {
       "type": "media",
       "multiple": true,
@@ -77,6 +65,18 @@
         }
       },
       "type": "text"
+    },
+    "position": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "committee",
+        "extended-committee"
+      ]
     }
   }
 }
