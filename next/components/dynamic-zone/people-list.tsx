@@ -3,6 +3,7 @@ import { Heading } from "@/components/elements/heading";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import Image from "next/image";
+import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer';
 
 interface PeopleListProps {
   heading: string;
@@ -23,8 +24,20 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
   // Ensure people.data exists and is an array
   const peopleData = people?.data || [];
 
+  const Skeleton = ({ imageUrl }) => (
+    <div
+      className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"
+      style={imageUrl ? { backgroundImage: `url(${imageUrl})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '320px' } : {}}
+    >
+      {!imageUrl && (
+        <div className="flex-1" style={{height: "320px"}}></div>
+      )}
+    </div>
+  );
+  
+  
   return (
-    <Container className="flex flex-col items-center justify-between pb-20">
+    <Container className="flex flex-col items-center justify-between">
       <div className="relative z-20 py-10 md:pt-40">
         <Heading as="h1" className="mt-4">
           {heading}
@@ -35,44 +48,24 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
         {peopleData.map((person: any) => {
           const firstname = person.firstname || "Unknown";
           const lastname = person.lastname || "Unknown";
-          const description =
-            person.description && typeof person.description === "string"
-              ? person.description
-              : "No description available.";
+          const description = <BlocksRenderer content={person.description} />;
           const socialMedia = person.socialMedia || [];
           const image = person.image || [];
-          const imageUrl = person?.image[0]?.url;
-          const imgUrl = imageUrl ? "http://localhost:1337" + imageUrl : 'https://example.com/example.jpeg';
-
-          console.log(socialMedia)
-          console.log(image)
+          const imageUrl = image[0]?.url ? "http://localhost:1337" + person?.image[0]?.url : "";
+          console.log(imageUrl);
+        
 
           return (
             <BentoGridItem
               key={person.id}
               title={`${firstname} ${lastname}`}
-              description={description}
+              description={
+                description
+              }
+              header={
+                <Skeleton imageUrl={imageUrl} />
+              }
             >
-              <Image
-                  src={imageUrl}
-                  alt={`${firstname} ${lastname}`}
-                  width={300}
-                  height={300}
-                  className="rounded-full"
-              />
-              <div className="flex space-x-2 mt-2">
-                {socialMedia.map((link: any, index: number) => (
-                  <a
-                    key={index}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 underline"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
             </BentoGridItem>
           );
         })}

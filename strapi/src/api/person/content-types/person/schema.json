@@ -58,14 +58,6 @@
         }
       }
     },
-    "description": {
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "type": "text"
-    },
     "position": {
       "pluginOptions": {
         "i18n": {
@@ -77,6 +69,14 @@
         "committee",
         "extended-committee"
       ]
+    },
+    "description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "blocks"
     }
   }
 }
