@@ -40,7 +40,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
   );
 
   return (
-    <Container className="flex flex-col items-center justify-between">
+    <Container className="flex flex-col items-center justify-between mb-12">
       <div className="relative z-20 py-10 md:pt-40">
         <Heading as="h1" className="mt-4">
           {heading}

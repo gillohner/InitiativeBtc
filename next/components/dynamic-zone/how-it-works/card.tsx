@@ -4,13 +4,13 @@ import React, { MouseEvent as ReactMouseEvent, useRef } from "react";
 import {
   motion,
   useMotionValue,
-  useMotionTemplate,
   useScroll,
   useTransform,
   useSpring,
 } from "framer-motion";
-import { CanvasRevealEffect } from "../../ui/canvas-reveal-effect";
 import Beam from "../../beam";
+import { BlocksContent } from "@strapi/blocks-react-renderer";
+import { MainContent } from "./main-content";
 
 export const Card = ({
   title,
@@ -20,9 +20,9 @@ export const Card = ({
   index,
 }: {
   title: string;
-  description: string | { [key: string]: any }; // Handle both string and object for rich text
-  image?: string;
-  link?: { url: string; target: string };
+  description: BlocksContent | { [key: string]: any };
+  image?: any;
+  link?: { URL: string; target: string; text: string; };
   index: number;
 }) => {
   const mouseX = useMotionValue(0);
@@ -54,7 +54,7 @@ export const Card = ({
     <div
       ref={ref}
       className="grid grid-cols-[80px_auto] max-w-5xl mx-auto py-10 cursor-pointer gap-8"
-      onClick={() => link?.url && window.open(link.url, link.target || "_self")}
+      onClick={() => link?.URL && window.open(link.URL, link.target || "_self")}
     >
       {/* Left Number */}
       <div className="flex flex-col items-start">
@@ -70,63 +70,33 @@ export const Card = ({
       </div>
 
       {/* Main Content */}
-      <div
-        className="group p-6 rounded-md border border-neutral-800 bg-neutral-950 relative z-40 flex flex-col gap-6"
-        onMouseMove={handleMouseMove}
-      >
-        {/* Hover Effect */}
-        <motion.div
-          className="pointer-events-none absolute z-10 -inset-px rounded-md opacity-0 transition duration-300 group-hover:opacity-100"
-          style={{
-            maskImage: useMotionTemplate`
-            radial-gradient(
-              circle at ${mouseX}px ${mouseY}px,
-              rgba(255,255,255,1),
-              transparent
-            )
-          `,
-            backgroundColor: "#F7931A",
-          }}
+      {link?.URL ? (
+        <motion.div 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 300 }}
         >
-          <CanvasRevealEffect
-            animationSpeed={5}
-            containerClassName="bg-transparent absolute inset-0 pointer-events-none"
-            colors={[
-              [59, 130, 246],
-              [139, 92, 246],
-            ]}
-            dotSize={2}
+          <MainContent
+            title={title}
+            description={description}
+            image={image}
+            link={link}
+            handleMouseMove={handleMouseMove}
+            mouseX={mouseX}
+            mouseY={mouseY}
           />
         </motion.div>
-
-        {/* Text Content */}
-        <div>
-          <p className="text-xl font-bold text-white">{title}</p>
-          {typeof description === "string" ? (
-            <p className="text-neutral-400 mt-2">{description}</p>
-          ) : (
-            <div
-              className="text-neutral-400 mt-2"
-              dangerouslySetInnerHTML={{
-                __html:
-                  description?.type === "rich-text" ? description.children : "",
-              }}
-            />
-          )}
-        </div>
-
-        {/* Image with Fade Effect */}
-        {image && (
-          <div className="relative w-full h-[150px]">
-            <div className="absolute inset-y-0 right-0 w-full bg-gradient-to-l from-black/80 to-transparent"></div>
-            <img
-              src={image}
-              alt={title}
-              className="h-full w-full object-cover rounded-md shadow-md"
-            />
-          </div>
-        )}
-      </div>
+      ) : (
+        <MainContent
+          title={title}
+          description={description}
+          image={image}
+          link={link}
+          handleMouseMove={handleMouseMove}
+          mouseX={mouseX}
+          mouseY={mouseY}
+        />
+      )}
     </div>
   );
 };

@@ -163,6 +163,7 @@ export interface DynamicZoneHowItWorks extends Struct.ComponentSchema {
     icon: 'question';
   };
   attributes: {
+    cta: Schema.Attribute.Component<'shared.link', false>;
     heading: Schema.Attribute.String;
     steps: Schema.Attribute.Component<'shared.steps', true>;
     sub_heading: Schema.Attribute.String;
