@@ -9,7 +9,7 @@ import Image from "next/image";
 
 interface MainContentProps {
   title: string;
-  description: BlocksContent | { [key: string]: any };
+  description: BlocksContent;
   image?: any;
   link?: { URL: string; target: string; text: string; };
   handleMouseMove: (event: ReactMouseEvent<HTMLDivElement>) => void;
@@ -60,7 +60,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       <div className="md:w-3/5 flex flex-col justify-between">
         <div>
           <p className="text-xl font-bold text-white">{title}</p>
-          <BlocksRenderer content={description} />
+          <BlocksRenderer content={Array.isArray(description) ? description : []} />
         </div>
 
         {/* Link with Icon */}

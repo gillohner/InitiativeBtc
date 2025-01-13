@@ -20,7 +20,7 @@ export const Card = ({
   index,
 }: {
   title: string;
-  description: BlocksContent | { [key: string]: any };
+  description: BlocksContent;
   image?: any;
   link?: { URL: string; target: string; text: string; };
   index: number;

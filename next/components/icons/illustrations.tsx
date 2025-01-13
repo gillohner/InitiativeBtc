@@ -415,7 +415,7 @@ export const MetaIconOutline = ({ className }: { className?: string }) => {
   );
 };
 
-export const NostrIcon = ({ className, size = 21, color = "currentColor" }: { className?: string, size: internal, color: string }) => {
+export const NostrIcon = ({ className, size = 21, color = "currentColor" }: { className?: string, size: number, color: string }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

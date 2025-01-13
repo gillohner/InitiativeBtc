@@ -50,7 +50,7 @@ export const HowItWorks = ({
                 title: string;
                 description: BlocksContent;
                 image: string;
-                link: { url: string; target: string };
+                link: { URL: string; target: string, text: string };
               },
               index: number
             ) => (
