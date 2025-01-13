@@ -19,6 +19,7 @@ export interface Article {
   locale: string;
   image: Image;
   categories: Category[]
+  date: Date;
 }
 
 export interface Product {
