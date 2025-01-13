@@ -28,7 +28,7 @@ export const MainContent: React.FC<MainContentProps> = ({
 }) => {
   return (
     <div
-      className="group p-6 rounded-md border border-neutral-800 bg-neutral-950 relative z-40 flex flex-col gap-6"
+      className="group p-6 rounded-md border border-neutral-800 bg-neutral-950 relative z-40 flex flex-col md:flex-row gap-6"
       onMouseMove={handleMouseMove}
     >
       {/* Hover Effect */}
@@ -57,14 +57,24 @@ export const MainContent: React.FC<MainContentProps> = ({
       </motion.div>
 
       {/* Text Content */}
-      <div>
-        <p className="text-xl font-bold text-white">{title}</p>
-        <BlocksRenderer content={description} />
+      <div className="md:w-3/5 flex flex-col justify-between">
+        <div>
+          <p className="text-xl font-bold text-white">{title}</p>
+          <BlocksRenderer content={description} />
+        </div>
+
+        {/* Link with Icon */}
+        {link?.URL && (
+          <div className="flex items-center gap-6 mt-4 md:mt-0" style={{justifyContent: "flex-end"}}>
+            <span style={{fontSize: "18px", fontWeight: "bold"}}>{link?.text ? link.text : link?.URL}</span>
+            <FaDownload size="30" />
+          </div>
+        )}
       </div>
 
       {/* Image with Fade Effect */}
       {image?.formats?.large?.url && (
-        <div className="relative w-full">
+        <div className="relative w-full md:w-2/5 mt-4 md:mt-0">
           <div className="absolute inset-y-0 right-0 w-full bg-gradient-to-l from-black/80 to-transparent"></div>
           <Image
             src={"http://localhost:1337" + image.formats.large.url}
@@ -73,14 +83,6 @@ export const MainContent: React.FC<MainContentProps> = ({
             height={300}
             className="h-full w-full object-cover rounded-md shadow-md"
           />
-        </div>
-      )}
-
-      {/* Link with Icon */}
-      {link?.URL && (
-        <div className="flex items-center gap-6" style={{justifyContent: "flex-end"}}>
-          <span style={{fontSize: "18px", fontWeight: "bold"}}>{link?.text ? link.text : link?.URL}</span>
-          <FaDownload size="30" />
         </div>
       )}
     </div>
