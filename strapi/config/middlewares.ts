@@ -4,7 +4,7 @@ module.exports = [
     name: 'strapi::cors',
     config: {
       enabled: true,
-      origin: ['http://localhost:3000', 'http://159.69.22.174:3000', 'https://initiativebtc.ch'], // Add your Next.js app's URL
+      origin: ['https://bitcoin-ja.ch', 'https://strapi.bitcoin-ja.ch'],
       headers: ['*'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     },
