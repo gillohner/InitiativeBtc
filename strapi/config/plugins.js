@@ -1,6 +1,6 @@
-const cryptoModule = require('crypto');
+import * as cryptoModule from 'crypto';
 
-module.exports = ({ env }) => ({
+export default ({ env }) => ({
   'users-permissions': {
     config: {
       jwtSecret: env('JWT_SECRET') || cryptoModule.randomBytes(16).toString('base64'),
