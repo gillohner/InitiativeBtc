@@ -7,20 +7,9 @@
   },
   "options": {},
   "attributes": {
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "link": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "shared.link"
     },
     "icon": {

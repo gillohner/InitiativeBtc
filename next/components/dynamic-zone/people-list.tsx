@@ -1,4 +1,4 @@
-"use client"; // Ensure this component is treated as a client component
+"use client";
 
 import { Container } from "@/components/container";
 import { Heading } from "@/components/elements/heading";
@@ -39,6 +39,14 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
     </div>
   );
 
+  const customBlockRenderers = {
+    link: ({ children, url }) => (
+      <a href={url} className="text-orange-500 hover:underline">
+        {children}
+      </a>
+    ),
+  };
+
   return (
     <Container className="flex flex-col items-center justify-between mb-12">
       <div className="relative z-20 py-10 md:pt-40">
@@ -47,7 +55,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
         </Heading>
         <p className="mt-2 text-neutral-400">{sub_heading}</p>
       </div>
-      <BentoGrid>
+      <BentoGrid className="grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
         {peopleData.map((person: any) => {
           const firstname = person.firstname || "Unknown";
           const lastname = person.lastname || "Unknown";
@@ -56,20 +64,20 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
           const imageUrl = image[0]?.url ? process.env.NEXT_PUBLIC_API_URL + person?.image[0]?.url : "";
           const socialMedia = person.socialMedia || [];
 
+          console.log("Social Media:", socialMedia);
+
           return (
             <motion.div 
               key={person.id} 
-              whileHover={{ scale: 1.05 }} // Scale up on hover
-              transition={{ type: "spring", stiffness: 300 }}
             >
               <BentoGridItem
                 title={`${firstname} ${lastname}`}
                 description={
                   <>
                     <div className="text-container">
-                      {description}
+                      <BlocksRenderer content={person.description} blocks={customBlockRenderers} />
                     </div>
-                    <SocialMediaButtons socialMedia={socialMedia}/>
+                    <SocialMediaButtons socialMedia={person.socialMedia || []}/>
                   </>
                 }
                 header={<Skeleton imageUrl={imageUrl} />}

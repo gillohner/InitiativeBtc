@@ -513,8 +513,7 @@ export interface SharedSocialMediaIconLinks extends Struct.ComponentSchema {
         'Email',
       ]
     >;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    link: Schema.Attribute.Component<'shared.link', true>;
+    link: Schema.Attribute.Component<'shared.link', false>;
   };
 }
 

@@ -2,16 +2,15 @@ import React from 'react';
 import { FaFacebook, FaInstagram, FaTelegram, FaLinkedin, FaYoutube, FaTwitter, FaEnvelope } from 'react-icons/fa';
 import { NostrIcon } from '@/components/icons/illustrations';
 
-// Map icons to their respective platforms
 const iconMap = {
-  Facebook: <FaFacebook size={21} />,
-  Instagram: <FaInstagram size={21} />,
-  Telegram: <FaTelegram size={21} />,
-  LinkedIn: <FaLinkedin size={21} />,
-  YouTube: <FaYoutube size={21} />,
-  X: <FaTwitter size={21} />,
-  Email: <FaEnvelope size={21} />,
-  Nostr: <NostrIcon className='' size={21} color="currentColor" />,
+  Facebook: FaFacebook,
+  Instagram: FaInstagram,
+  Telegram: FaTelegram,
+  Linkedin: FaLinkedin,
+  YouTube: FaYoutube,
+  X: FaTwitter,
+  Email: FaEnvelope,
+  Nostr: NostrIcon,
 };
 
 type SocialPlatform = keyof typeof iconMap;
@@ -27,18 +26,21 @@ interface SocialMediaButtonsProps {
 
 const SocialMediaButtons: React.FC<SocialMediaButtonsProps> = ({ socialMedia }) => {
   return (
-    <div className="flex space-x-2">
+    <div className="flex space-x-2 mt-4">
       {socialMedia.map((item, index) => {
-        const platform = item.platform as SocialPlatform;
+        console.log("Social Media Item:", item);
+        const platform = item.icon as SocialPlatform;
         const link = item.link?.[0]?.URL || '#';
 
         if (!(platform in iconMap)) {
-          return null; // Skip if the platform is not in iconMap
+          return null;
         }
+
+        const Icon = iconMap[platform];
 
         return (
           <a key={index} href={link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-300">
-            {iconMap[platform]}
+            <Icon size={21} />
           </a>
         );
       })}
