@@ -12,12 +12,6 @@ export const Hero = ({ heading, sub_heading, CTAs, locale }: { heading: string; 
   return (
     <BackgroundLines>
       <div className="h-screen overflow-hidden relative flex flex-col items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-        </motion.div>
         <Heading
           as="h1"
           className="text-4xl md:text-4xl lg:text-8xl font-semibold max-w-7xl mx-auto text-center mt-6 relative z-10  py-6"
