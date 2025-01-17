@@ -53,7 +53,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
           const lastname = person.lastname || "Unknown";
           const description = <BlocksRenderer content={person.description} />;
           const image = person.image || [];
-          const imageUrl = image[0]?.url ? "http://localhost:1337" + person?.image[0]?.url : "";
+          const imageUrl = image[0]?.url ? env('NEXT_PUBLIC_API_URL') + person?.image[0]?.url : "";
           const socialMedia = person.socialMedia || [];
 
           return (
