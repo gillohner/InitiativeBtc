@@ -30,7 +30,7 @@ const SocialMediaButtons: React.FC<SocialMediaButtonsProps> = ({ socialMedia }) 
       {socialMedia.map((item, index) => {
         console.log("Social Media Item:", item);
         const platform = item.icon as SocialPlatform;
-        const link = item.link?.[0]?.URL || '#';
+        const link = item.link?.URL || '#';
 
         if (!(platform in iconMap)) {
           return null;
