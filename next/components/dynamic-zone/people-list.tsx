@@ -4,7 +4,7 @@ import { Container } from "@/components/container";
 import { Heading } from "@/components/elements/heading";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import fetchContentType from "@/lib/strapi/fetchContentType";
-import { BlocksRenderer, type BlocksContent, type BlocksComponents  } from '@strapi/blocks-react-renderer';
+import { BlocksRenderer, type BlocksContent } from '@strapi/blocks-react-renderer';
 import SocialMediaButtons from '../elements/socialMediaButtons';
 import { motion } from 'framer-motion';
 import "./people-list.css";
@@ -15,6 +15,10 @@ interface PeopleListProps {
   category: string;
 }
 
+type CustomBlocksComponents = {
+  [K in keyof BlocksContent]?: React.ComponentType<any>;
+};
+
 export const PeopleList = async ({ heading, sub_heading, category }: PeopleListProps) => {
   // Fetch people data filtered by category
   const people = await fetchContentType(
@@ -22,8 +26,6 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
     `filters[position][$eq]=${category}`,
     false
   );
-
-  console.log("Fetched People Data:", people);
 
   // Ensure people.data exists and is an array
   const peopleData = people?.data || [];
@@ -39,7 +41,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
     </div>
   );
 
-  const customBlockRenderers: Partial<BlocksComponents> = {
+  const customBlockRenderers: Partial<CustomBlocksComponents> = {
     link: ({ children, url }: { children: React.ReactNode; url: string }) => (
       <a href={url} className="text-orange-500 hover:underline">
         {children}
