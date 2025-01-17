@@ -92,11 +92,12 @@ export interface DynamicZoneCta extends Struct.ComponentSchema {
 export interface DynamicZoneFaq extends Struct.ComponentSchema {
   collectionName: 'components_dynamic_zone_faqs';
   info: {
+    description: '';
     displayName: 'FAQ';
     icon: 'question';
   };
   attributes: {
-    faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    faq_category: Schema.Attribute.Component<'items.faq-category', true>;
     heading: Schema.Attribute.String;
     sub_heading: Schema.Attribute.String;
   };
@@ -285,6 +286,19 @@ export interface GlobalNavbar extends Struct.ComponentSchema {
     left_navbar_items: Schema.Attribute.Component<'shared.link', true>;
     logo: Schema.Attribute.Relation<'oneToOne', 'api::logo.logo'>;
     right_navbar_items: Schema.Attribute.Component<'shared.link', true>;
+  };
+}
+
+export interface ItemsFaqCategory extends Struct.ComponentSchema {
+  collectionName: 'components_items_faq_categories';
+  info: {
+    description: '';
+    displayName: 'faq_Category';
+    icon: 'code';
+  };
+  attributes: {
+    faqs: Schema.Attribute.Relation<'oneToMany', 'api::faq.faq'>;
+    name: Schema.Attribute.String;
   };
 }
 
@@ -556,6 +570,7 @@ declare module '@strapi/strapi' {
       'dynamic-zone.testimonials': DynamicZoneTestimonials;
       'global.footer': GlobalFooter;
       'global.navbar': GlobalNavbar;
+      'items.faq-category': ItemsFaqCategory;
       'items.graph-card-top-items': ItemsGraphCardTopItems;
       'items.input': ItemsInput;
       'items.left-navbar-items': ItemsLeftNavbarItems;
