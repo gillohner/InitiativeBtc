@@ -40,7 +40,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
   );
 
   const customBlockRenderers = {
-    link: ({ children, url }) => (
+    link: ({ children: any, url: string }) => (
       <a href={url} className="text-orange-500 hover:underline">
         {children}
       </a>
