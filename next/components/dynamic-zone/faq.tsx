@@ -33,13 +33,26 @@ export const FAQ = ({
     setOpenItems(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
+  const containsSearchTerm = (blocks: BlocksContent, term: string): boolean => {
+    return blocks.some(block => {
+      if (block.type === 'paragraph') {
+        return block.children.some(child => 
+          typeof child === 'object' && 'text' in child && 
+          child.text.toLowerCase().includes(term.toLowerCase())
+        );
+      }
+      return false;
+    });
+  };
+  
   const filteredCategories = faq_category?.map(category => ({
     ...category,
     faqs: category.faqs.filter(faq => 
       faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (typeof faq.answer === 'string' && faq.answer.toLowerCase().includes(searchTerm.toLowerCase()))
+      containsSearchTerm(faq.answer, searchTerm)
     )
   })).filter(category => category.faqs.length > 0);
+  
 
   return (
     <Container className="flex flex-col items-center justify-between pb-20">
