@@ -4,7 +4,7 @@ import { Container } from "@/components/container";
 import { Heading } from "@/components/elements/heading";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import fetchContentType from "@/lib/strapi/fetchContentType";
-import { BlocksRenderer } from '@strapi/blocks-react-renderer';
+import { BlocksRenderer, type BlocksComponents } from '@strapi/blocks-react-renderer';
 import SocialMediaButtons from '../elements/socialMediaButtons';
 import { motion } from 'framer-motion';
 import "./people-list.css";
@@ -39,9 +39,9 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
     </div>
   );
 
-  const customBlockRenderers = {
-    link: ({ children, url }: { children: React.ReactNode, url: string }) => (
-      <a href={url} className="text-orange-500 hover:underline">
+  const customBlockRenderers: Partial<BlocksComponents> = {
+    link: ({ children, url, ...props }) => (
+      <a href={url} className="text-orange-500 hover:underline" {...props}>
         {children}
       </a>
     ),
@@ -75,7 +75,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
                 description={
                   <>
                     <div className="text-container">
-                      <BlocksRenderer content={person.description} blocks={customBlockRenderers} />
+                    <BlocksRenderer content={person.description} blocks={customBlockRenderers} />
                     </div>
                     <SocialMediaButtons socialMedia={person.socialMedia || []}/>
                   </>
