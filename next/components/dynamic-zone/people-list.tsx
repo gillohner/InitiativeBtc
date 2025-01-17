@@ -15,7 +15,7 @@ interface PeopleListProps {
   category: string;
 }
 
-export const PeopleList = async ({ heading, sub_heading, category, env }: PeopleListProps) => {
+export const PeopleList = async ({ heading, sub_heading, category }: PeopleListProps) => {
   // Fetch people data filtered by category
   const people = await fetchContentType(
     "people",
