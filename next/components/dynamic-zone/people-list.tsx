@@ -40,12 +40,12 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
   );
 
   const customBlockRenderers = {
-    link: ({ children: any, url: string }) => (
+    link: ({ children, url }: { children: React.ReactNode, url: string }) => (
       <a href={url} className="text-orange-500 hover:underline">
         {children}
       </a>
     ),
-  };
+  };  
 
   return (
     <Container className="flex flex-col items-center justify-between mb-12">
