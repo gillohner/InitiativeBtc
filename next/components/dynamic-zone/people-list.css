@@ -1,4 +1,14 @@
 .text-container {
     overflow-wrap: break-word;
     word-wrap: break-word;
+
+    a {
+        color: #F7931A;
+        text-decoration: none;
+
+        &:hover {
+            color: #8e30eb;
+            text-decoration: underline;
+        }
+    }
 }

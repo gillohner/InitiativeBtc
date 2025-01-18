@@ -7,6 +7,7 @@ import fetchContentType from "@/lib/strapi/fetchContentType";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import SocialMediaButtons from '../elements/socialMediaButtons';
 import { motion } from 'framer-motion';
+import { Link } from "next-view-transitions";
 import "./people-list.css";
 
 interface PeopleListProps {
@@ -40,10 +41,10 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
   );
 
   const customBlockRenderers = {
-    link: ({ children: any, url: string }) => (
-      <a href={url} className="text-orange-500 hover:underline">
+    link: ({ children, url }) => (
+      <Link href={url} target="_blank" className="text-orange underline">
         {children}
-      </a>
+      </Link>
     ),
   };
 
