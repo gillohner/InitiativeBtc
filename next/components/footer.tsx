@@ -15,6 +15,12 @@ export const Footer = async ({ data, locale }: { data: any, locale: string }) =>
             </div>
             <div className="max-w-xs">{data?.description}</div>
             <div className="mt-4">{data?.copyright}</div>
+            <div className="mt-10">
+              BITCOIN VOLKSINITIATIVE<br/>
+              POSTFACH 521<br/>
+              6440 BRUNNEN
+            </div>
+            <div className="mt-2"></div>
           </div>
           <div className="grid grid-cols-3 gap-10 items-start mt-10 md:mt-0">
             <LinkSection links={data?.internal_links} locale={locale} />
