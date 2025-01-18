@@ -78,6 +78,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
                 </>
               }
               header={<Skeleton imageUrl={imageUrl} />}
+              key={person.id || `person-${index}`}
             >
             </BentoGridItem>
           );
