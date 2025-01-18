@@ -84,7 +84,7 @@ export const MainContent: React.FC<MainContentProps> = ({
         <div className="relative w-full md:w-2/5 mt-4 md:mt-0">
           <div className="absolute inset-y-0 right-0 w-full bg-gradient-to-l from-black/80 to-transparent"></div>
           <Image
-            src={"http://localhost:1337" + image.formats.large.url}
+            src={process.env.NEXT_PUBLIC_API_URL + image.formats.large.url}
             alt={""}
             width={300}
             height={300}
