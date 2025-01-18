@@ -100,7 +100,13 @@ export const MobileNavbar = ({ leftNavbarItems, rightNavbarItems, logo, locale }
           </div>
           <div className="flex flex-row w-full items-start gap-2.5  px-8 py-4 ">
             {rightNavbarItems.map((item, index) => (
-              <Button key={item.text} variant={index === rightNavbarItems.length - 1 ? 'primary' : 'simple'} as={Link} href={`/${locale}${item.URL}`}>
+              <Button 
+                key={item.text}
+                variant={index === rightNavbarItems.length - 1 ? 'primary' : 'simple'}
+                as={Link} 
+                href={`/${locale}${item.URL}`}
+                onClick={() => setOpen(false)}
+              >
                 {item.text}
               </Button>
             ))}

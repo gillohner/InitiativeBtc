@@ -8,6 +8,9 @@ export function strapiImage(url: string): string {
       return `https://${document.location.host.replace("client-", "api-")}${url}`
     }
 
+    console.log("url", url)
+    console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
+
     return process.env.NEXT_PUBLIC_API_URL + url
   }
   return url
