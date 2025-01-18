@@ -6,7 +6,6 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import fetchContentType from "@/lib/strapi/fetchContentType";
 import { BlocksRenderer } from '@strapi/blocks-react-renderer';
 import SocialMediaButtons from '../elements/socialMediaButtons';
-import { motion } from 'framer-motion';
 import { Link } from "next-view-transitions";
 import "./people-list.css";
 
@@ -40,13 +39,13 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
     </div>
   );
 
-  const customBlockRenderers = {
+  const customBlockRenderers: Record<string, (props: { children: React.ReactNode; url: string }) => JSX.Element> = {
     link: ({ children, url }) => (
       <Link href={url} target="_blank" className="text-orange underline">
         {children}
       </Link>
     ),
-  };
+  };  
 
   return (
     <Container className="flex flex-col items-center justify-between mb-12">
@@ -68,23 +67,19 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
           console.log("Social Media:", socialMedia);
 
           return (
-            <motion.div 
-              key={person.id} 
+            <BentoGridItem
+              title={`${firstname} ${lastname}`}
+              description={
+                <>
+                  <div className="text-container">
+                    <BlocksRenderer content={person.description} blocks={customBlockRenderers} />
+                  </div>
+                  <SocialMediaButtons socialMedia={person.socialMedia || []}/>
+                </>
+              }
+              header={<Skeleton imageUrl={imageUrl} />}
             >
-              <BentoGridItem
-                title={`${firstname} ${lastname}`}
-                description={
-                  <>
-                    <div className="text-container">
-                      <BlocksRenderer content={person.description} blocks={customBlockRenderers} />
-                    </div>
-                    <SocialMediaButtons socialMedia={person.socialMedia || []}/>
-                  </>
-                }
-                header={<Skeleton imageUrl={imageUrl} />}
-              >
-              </BentoGridItem>
-            </motion.div>
+            </BentoGridItem>
           );
         })}
       </BentoGrid>
