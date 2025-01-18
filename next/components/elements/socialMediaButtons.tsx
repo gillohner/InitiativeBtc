@@ -17,6 +17,7 @@ type SocialPlatform = keyof typeof iconMap;
 
 interface SocialMediaItem {
   platform: string;
+  icon: string;
   link: Array<{ URL: string }>;
 }
 
@@ -28,7 +29,6 @@ const SocialMediaButtons: React.FC<SocialMediaButtonsProps> = ({ socialMedia }) 
   return (
     <div className="flex space-x-2 mt-4">
       {socialMedia.map((item, index) => {
-        console.log("Social Media Item:", item);
         const platform = item.icon as SocialPlatform;
         const link = item.link?.URL || '#';
 
