@@ -3,9 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: ['http', 'https'], // or 'https' if applicable
-        hostname: ['localhost', 'strapi.bitcoin-ja.ch'],
-        port: '1337', // specify the port if it's not the default
+        protocol: process.env.NEXT_PUBLIC_API_PROTOCOL, // or 'https' if applicable
+        hostname: process.env.NEXT_PUBLIC_API_URL,
         pathname: '/uploads/**', // specify the path pattern for images
       },
     ],
