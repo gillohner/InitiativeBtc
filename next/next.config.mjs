@@ -3,9 +3,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: process.env.NEXT_PUBLIC_API_PROTOCOL, // or 'https' if applicable
-        hostname: process.env.NEXT_PUBLIC_API_URL,
-        pathname: '/uploads/**', // specify the path pattern for images
+        protocol: process.env.NEXT_PUBLIC_API_PROTOCOL || 'http',
+        hostname: new URL(process.env.NEXT_PUBLIC_API_URL).hostname,
+        port: process.env.NEXT_PUBLIC_API_PORT || '1337',
+        pathname: '/uploads/**',
       },
     ],
   },
@@ -24,6 +25,7 @@ const nextConfig = {
       redirections = redirections.concat(redirectItems);
       return redirections;
     } catch (error) {
+      console.error('Error fetching redirections:', error);
       return [];
     }
   },
