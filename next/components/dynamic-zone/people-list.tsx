@@ -65,6 +65,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
           const socialMedia = person.socialMedia || [];
 
           console.log("Social Media:", socialMedia);
+          console.log("Person:", person);
 
           return (
             <BentoGridItem
@@ -78,7 +79,7 @@ export const PeopleList = async ({ heading, sub_heading, category }: PeopleListP
                 </>
               }
               header={<Skeleton imageUrl={imageUrl} />}
-              key={person.id || `person-${index}`}
+              key={person.id}
             >
             </BentoGridItem>
           );
