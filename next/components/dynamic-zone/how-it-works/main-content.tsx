@@ -60,7 +60,14 @@ export const MainContent: React.FC<MainContentProps> = ({
       <div className="md:w-3/5 flex flex-col justify-between">
         <div>
           <p className="text-xl font-bold text-white">{title}</p>
-          <BlocksRenderer content={Array.isArray(description) ? description : []} />
+          <BlocksRenderer 
+            content={Array.isArray(description) ? description : []} 
+            blocks={{
+              paragraph: ({ children }) => (
+                <p className="whitespace-pre-line">{children}</p>
+              ),
+            }}
+          />
         </div>
 
         {/* Link with Icon */}

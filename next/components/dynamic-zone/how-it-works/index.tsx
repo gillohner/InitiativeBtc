@@ -35,6 +35,7 @@ export const HowItWorks = ({
             <Button
               as={Link}
               href={`${cta.URL}`}
+              target={'_blank'}
               {...(cta.variant && { variant: cta.variant })}
             >
               {cta.text}

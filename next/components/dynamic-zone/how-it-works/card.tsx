@@ -54,7 +54,7 @@ export const Card = ({
     <div
       ref={ref}
       className="grid grid-cols-[80px_auto] max-w-5xl mx-auto py-10 cursor-pointer gap-8"
-      onClick={() => link?.URL && window.open(link.URL, link.target || "_self")}
+      onClick={() => link?.URL && window.open(link.URL, link.target || "_blank")}
     >
       {/* Left Number */}
       <div className="flex flex-col items-start">
