@@ -18,7 +18,7 @@ type SocialPlatform = keyof typeof iconMap;
 interface SocialMediaItem {
   platform: string;
   icon: string;
-  link: Array<{ URL: string }>;
+  link: { URL: string };
 }
 
 interface SocialMediaButtonsProps {
@@ -30,7 +30,7 @@ const SocialMediaButtons: React.FC<SocialMediaButtonsProps> = ({ socialMedia }) 
     <div className="flex space-x-2 mt-4">
       {socialMedia.map((item, index) => {
         const platform = item.icon as SocialPlatform;
-        const link = item.link?.URL || '#';
+        const link = item.link?.URL || ''; // Access the first item in the array
 
         if (!(platform in iconMap)) {
           return null;
@@ -40,7 +40,7 @@ const SocialMediaButtons: React.FC<SocialMediaButtonsProps> = ({ socialMedia }) 
 
         return (
           <a key={index} href={link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-300">
-            <Icon size={21} />
+            <Icon size={21} color={""} />
           </a>
         );
       })}
